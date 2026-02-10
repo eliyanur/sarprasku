@@ -13,7 +13,7 @@ class UserController extends Controller
     // READ
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role', '!=', 'admin')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -28,14 +28,14 @@ class UserController extends Controller
     {
         $request->validate([
         'name' => 'required',
-        'email' => 'required|email|unique:users,email',
+        'email' => 'nullable|email|unique:users,email', 
         'password' => 'required|min:6',
         'role' => 'required'
     ]);
 
     User::create([
     'name' => $request->name,
-    'email' => $request->email,
+    'email'    => $request->filled('email') ? $request->email : null,
     'password' => $request->password, 
     'role' => $request->role,
 ]);
@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
+            'email' => $request->filled('email') ? $request->email : null,
             'role' => $request->role,
         ]);
 
@@ -64,9 +64,13 @@ class UserController extends Controller
     }
 
     // DELETE
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return redirect()->route('admin.users.index');
+   public function destroy(User $user)
+{
+    if ($user->role === 'admin') {
+        return back()->with('error', 'Admin tidak bisa dihapus');
     }
+
+    $user->delete();
+    return redirect()->route('admin.users.index');
+}
 }

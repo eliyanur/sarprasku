@@ -10,7 +10,7 @@
             Tambah Data Alat
         </h2>
 
-        <form action="{{ route('admin.alat.store') }}" method="POST" class="space-y-5">
+        <form action="{{ route('admin.alat.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
             @csrf
 
             <!-- NAMA ALAT -->
@@ -81,6 +81,25 @@
                     <option value="rusak">Rusak</option>
                 </select>
             </div>
+            <!-- FOTO ALAT -->
+    <div>
+        <label class="block text-sm font-medium text-slate-700">
+            Foto Alat
+        </label>
+        <input type="file" name="gambar" id="gambar"
+            class="w-full mt-1 text-sm text-slate-500
+                   file:mr-4 file:py-2 file:px-4
+                   file:rounded-xl file:border-0
+                   file:text-sm file:font-semibold
+                   file:bg-indigo-50 file:text-indigo-700
+                   hover:file:bg-indigo-100"
+            accept="image/*"
+        >
+        <!-- PREVIEW GAMBAR -->
+        <div class="mt-3">
+            <img id="preview" class="w-32 h-32 object-cover rounded-lg hidden">
+        </div>
+    </div>
 
             <!-- ACTION -->
             <div class="flex flex-col sm:flex-row sm:justify-end gap-3 pt-4">

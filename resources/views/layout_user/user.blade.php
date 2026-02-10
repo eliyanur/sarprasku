@@ -31,6 +31,7 @@ flex flex-col max-w-full shadow-inner">
     @include('layout_user.partial_user.footer')
 
     <script src="{{ asset('assets_user/js/sidebaruser.js') }}"></script>
+     <script src="{{ asset('assets_user/js/alat.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

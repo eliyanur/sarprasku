@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('jumlah_total');
             $table->integer('jumlah_tersedia');
             $table->string('kondisi');
+            $table->string('gambar')->nullable(); 
             $table->timestamps();
         });
     }

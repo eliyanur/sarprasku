@@ -40,11 +40,11 @@
                 <input
                     type="email"
                     name="email"
-                    value="{{ old('email', $user->email) }}"
+                    value="{{ old('email') ?? ($user->email ?? '') }}"
+                    autocomplete="off"
                     class="w-full mt-1 rounded-xl border border-slate-300
-                           focus:border-indigo-500 focus:ring focus:ring-indigo-200
-                           text-sm px-4 py-2.5"
-                    required>
+                        focus:border-indigo-500 focus:ring focus:ring-indigo-200
+                        text-sm px-4 py-2.5"  placeholder="Email pengguna (boleh dikosongkan)">
             </div>
 
             <!-- PASSWORD (OPSIONAL) -->

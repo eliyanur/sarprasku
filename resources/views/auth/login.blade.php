@@ -62,21 +62,46 @@
                 </div>
 
                 {{-- PASSWORD --}}
-                <div>
-                    <label class="text-sm font-medium text-slate-600">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        name="password"
-                        required
-                        class="mt-1 w-full rounded-xl border-slate-300
-                               focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                    @error('password')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+<div class="relative">
+    <label class="text-sm font-medium text-slate-600">
+        Password
+    </label>
+
+    <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        class="mt-1 w-full rounded-xl border-slate-300 pr-10
+               focus:border-indigo-500 focus:ring-indigo-500"
+    >
+
+    <!-- ICON EYE -->
+    <button
+        type="button"
+        onclick="togglePassword()"
+        class="absolute right-3 top-9 text-slate-500 hover:text-slate-700"
+    >
+        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5
+                     c4.478 0 8.268 2.943 9.542 7
+                     -1.274 4.057-5.064 7-9.542 7
+                     -4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+    </button>
+
+    @error('password')
+        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+    @enderror
+</div>
+
 
                 {{-- REMEMBER & LUPA --}}
                 <div class="flex items-center justify-between text-sm">
@@ -115,6 +140,6 @@
         </div>
     </div>
 </div>
-
+<script src="{{ asset('js/login.js') }}"></script>
 </body>
 </html>
