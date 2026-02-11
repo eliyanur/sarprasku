@@ -55,20 +55,6 @@
         <a href="#"
            class="flex items-center gap-4 px-5 py-3 rounded-2xl
                   text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
-            <i class="fa-solid fa-file-signature"></i>
-            Peminjaman
-        </a>
-
-        <a href="#"
-           class="flex items-center gap-4 px-5 py-3 rounded-2xl
-                  text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
-            <i class="fa-solid fa-rotate-left"></i>
-            Pengembalian
-        </a>
-
-        <a href="#"
-           class="flex items-center gap-4 px-5 py-3 rounded-2xl
-                  text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
             <i class="fa-solid fa-clock-rotate-left"></i>
             Log Aktivitas
         </a>

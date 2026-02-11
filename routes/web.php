@@ -7,6 +7,10 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DataAlatController;
 use App\Http\Controllers\User\AlatController;
+use App\Http\Controllers\User\PeminjamanController;
+use App\Http\Controllers\User\RiwayatPeminjamanController;
+use App\Http\Controllers\Petugas\PeminjamanAlatController;
+use App\Http\Controllers\Petugas\PengembalianController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardPetugasController;
@@ -74,6 +78,14 @@ Route::prefix('petugas')
 
         Route::get('/dashboard', [DashboardPetugasController::class, 'index'])
             ->name('dashboard');
+         Route::get('/peminjaman', [PeminjamanAlatController::class, 'index'])
+        ->name('peminjaman');
+        Route::post('/peminjaman/{id}/setujui', [PeminjamanAlatController::class, 'setujui'])
+        ->name('peminjaman.setujui');
+        Route::post('/peminjaman/{id}/tolak', [PeminjamanAlatController::class, 'tolak'])
+        ->name('peminjaman.tolak');
+         Route::post('/peminjaman/kembalikan/{id}', [PeminjamanAlatController::class, 'kembalikan'])
+        ->name('peminjaman.kembalikan');
 });
 
 /* ================= USER / PEMINJAM ================= */
@@ -86,6 +98,10 @@ Route::prefix('user')
             ->name('dashboard');
         Route::get('/alat', [AlatController::class, 'index'])
         ->name('alat');
+        Route::post('/peminjaman', [PeminjamanController::class, 'store'])
+        ->name('peminjaman.store');
+        Route::get('/riwayat', [RiwayatPeminjamanController::class, 'index'])
+        ->name('riwayat');
 });
 
 /* ================= PROFILE (SEMUA ROLE) ================= */

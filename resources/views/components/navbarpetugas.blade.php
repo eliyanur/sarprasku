@@ -1,11 +1,11 @@
-<nav
-    id="navbar"
-    class="fixed top-0 left-0 md:left-[320px] right-0 md:right-3 z-30 bg-gradient-to-b from-blue-400 to-indigo-500
-    rounded-b-3xl shadow-sm flex items-center
-    px-4 md:px-6 py-4 md:py-6 transition-all duration-300"
->
+<!-- NAVBAR -->
+<header
+    class="fixed top-0 left-0 md:left-[300px] right-0 h-20
+           bg-gradient-to-b from-indigo-50 to-purple-50 shadow-lg
+           flex items-center
+           px-4 md:px-8 z-30">
 
-      <button id="btnSidebar"
+           <button id="btnSidebar"
     class="md:hidden p-2 rounded-lg bg-indigo-500 text-white">
     <i class="fa-solid fa-bars"></i>
 </button>
@@ -15,14 +15,6 @@
     class="fixed inset-0 bg-black/40 backdrop-blur-sm
            hidden z-20 md:hidden">
 </div>
-
-    <h1
-    class="absolute left-1/2 -translate-x-1/2
-    md:static md:translate-x-0
-    text-lg md:text-xl font-bold text-white">
-    @yield('pageTitle', 'Dashboard')
-</h1>
-
 
     <!-- RIGHT -->
     <div class="flex items-center gap-6 ml-auto">
@@ -37,5 +29,6 @@
                 class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full">
             </span>
         </button>
-        
-</nav>
+
+    </div>
+</header>

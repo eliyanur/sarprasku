@@ -11,6 +11,8 @@ class Peminjaman extends Model
 
     protected $fillable = [
         'user_id',
+        'id_alat',
+        'jumlah',
         'tanggal_pinjam',
         'tanggal_kembali',
         'status'
@@ -21,6 +23,11 @@ class Peminjaman extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function alat()
+    {
+        return $this->belongsTo(Alat::class, 'id_alat');
+    }
+    
     public function pengembalian()
     {
         return $this->hasOne(Pengembalian::class);

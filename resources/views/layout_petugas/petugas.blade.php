@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('pageTitle', 'User Dashboard')</title>
+    <title>@yield('pageTitle', 'Petugas Dashboard')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
      {{-- Include link (CSS, font, dsb) --}}
-    @include('layout_user.partial_user.link')
+    @include('layout_petugas.partial_petugas.link')
 </head>
 <body class="min-h-screen flex flex-col bg-white">
 
 {{-- HEADER admin --}}
-    @include('layout_user.partial_user.header')
+    @include('layout_petugas.partial_petugas.header')
 
  {{-- KONTEN UTAMA --}}
       <main
@@ -27,13 +27,13 @@ flex flex-col max-w-full shadow-inner">
     @yield('content')
 </main>
 
-    {{-- FOOTER USER --}}
-    @include('layout_user.partial_user.footer')
+    {{-- FOOTER petugas --}}
+    @include('layout_petugas.partial_petugas.footer')
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('assets_user/js/alat.js') }}"></script>
-    <script src="{{ asset('assets_user/js/sidebaruser.js') }}"></script>
+    <script src="{{ asset('assets_petugas/js/pengembalian.js') }}"></script>
+    <script src="{{ asset('assets_petugas/js/sidebarpetugas.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

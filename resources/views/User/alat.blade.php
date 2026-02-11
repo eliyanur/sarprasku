@@ -65,62 +65,14 @@
                     <div class="mt-4">
                         @if ($item->jumlah_tersedia > 0)
                             <button 
-    onclick="openModal({{ $item->id }}, '{{ $item->nama_alat }}', {{ $item->jumlah_tersedia }})"
-    class="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
-    Pinjam Alat
-</button>
-
-{{-- MODAL PEMINJAMAN --}}
-<div id="modalPinjam" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-
-    <div class="bg-white w-full max-w-md rounded-2xl p-6 relative animate-fadeIn">
-
-        <button onclick="closeModal()" 
-            class="absolute top-3 right-3 text-gray-500 hover:text-red-500">
-            ✕
-        </button>
-
-        <h2 class="text-xl font-semibold mb-4">Form Peminjaman</h2>
-
-        <form action="{{ route('user.peminjaman.store') }}" method="POST">
-            @csrf
-
-            <input type="hidden" name="alat_id" id="modal_alat_id">
-
-            <div class="mb-4">
-                <label class="block text-sm mb-1">Nama Alat</label>
-                <input type="text" id="modal_nama_alat"
-                    class="w-full border rounded-xl px-3 py-2 bg-gray-100" readonly>
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-sm mb-1">Jumlah</label>
-                <input type="number" name="jumlah" id="modal_max"
-                    class="w-full border rounded-xl px-3 py-2" min="1" required>
-                <p class="text-xs text-gray-500 mt-1">
-                    Stok tersedia: <span id="modal_stok"></span>
-                </p>
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-sm mb-1">Tanggal Pinjam</label>
-                <input type="date" name="tgl_pinjam"
-                    class="w-full border rounded-xl px-3 py-2" required>
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-sm mb-1">Tanggal Kembali</label>
-                <input type="date" name="tgl_kembali"
-                    class="w-full border rounded-xl px-3 py-2" required>
-            </div>
-
-            <button type="submit"
-                class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition">
-                Ajukan Peminjaman
-            </button>
-        </form>
-    </div>
-</div>
+                                onclick="openModal(
+                                    '{{ $item->id }}',
+                                    '{{ $item->nama_alat }}',
+                                    '{{ $item->jumlah_tersedia }}'
+                                )"
+                                class="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+                                Pinjam Alat
+                            </button>
                         @else
                             <button disabled
                                 class="w-full px-4 py-2 bg-slate-200 text-slate-500 rounded-xl cursor-not-allowed">
@@ -140,3 +92,58 @@
 @endif
 
 @endsection
+{{-- MODAL PEMINJAMAN --}}
+<div id="modalPinjam"
+    class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+    <div class="bg-white w-full max-w-md p-6 rounded-2xl shadow-xl relative">
+
+        <h2 class="text-lg font-semibold mb-4">Form Peminjaman</h2>
+
+        <form action="{{ route('user.peminjaman.store') }}" method="POST">
+            @csrf
+
+            <input type="hidden" name="id_alat" id="modal_id_alat">
+
+            <div class="mb-4">
+                <label class="text-sm text-slate-600">Nama Alat</label>
+                <input type="text"
+                    id="modal_nama_alat"
+                    class="w-full border rounded-xl p-2 bg-slate-100"
+                    readonly>
+            </div>
+
+            <div class="mb-4">
+                <label class="text-sm text-slate-600">Jumlah Pinjam</label>
+                <input type="number"
+                    name="jumlah"
+                    id="modal_jumlah"
+                    min="1"
+                    class="w-full border rounded-xl p-2"
+                    required>
+            </div>
+
+            <div class="mb-4">
+                <label class="text-sm text-slate-600">Tanggal Kembali</label>
+                <input type="date"
+                    name="tanggal_kembali"
+                    class="w-full border rounded-xl p-2"
+                    required>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button type="button"
+                    onclick="closeModal()"
+                    class="px-4 py-2 bg-gray-400 text-white rounded-xl">
+                    Batal
+                </button>
+
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+                    Ajukan
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

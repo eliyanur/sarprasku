@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peminjamen', function (Blueprint $table) {
+        Schema::create('pengembalians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->date('tanggal_pinjam');
-            $table->date('tanggal_kembali');
-            $table->enum('status', ['pending', 'disetujui', 'ditolak', 'dikembalikan']);
+            $table->foreignId('peminjaman_id')->constrained()->cascadeOnDelete();
+            $table->date('tanggal_dikembalikan');
+            $table->string('kondisi_pengembalian');
+            $table->integer('denda')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('peminjamen');
+        Schema::dropIfExists('pengembalians');
     }
 };

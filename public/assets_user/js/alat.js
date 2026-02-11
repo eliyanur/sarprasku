@@ -1,43 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    const btn = document.getElementById('kategoriButton');
-    const menu = document.getElementById('kategoriMenu');
-    const icon = document.getElementById('kategoriIcon');
-    const kategoriText = document.getElementById('kategoriText');
-    const items = document.querySelectorAll('.kategori-item');
-    const container = document.getElementById('alatContainer');
+    window.openModal = function(id, nama, stok) {
+        document.getElementById('modalPinjam').classList.remove('hidden');
+        document.getElementById('modal_id_alat').value = id;
+        document.getElementById('modal_nama_alat').value = nama;
+        document.getElementById('modal_jumlah').setAttribute('max', stok);
+    }
 
-    // Toggle dropdown
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        icon.classList.toggle('rotate-180');
-    });
-
-    // Klik item dropdown
-    items.forEach(item => {
-        item.addEventListener('click', e => {
-            e.preventDefault();
-            const kategori = item.textContent;
-            kategoriText.textContent = kategori;
-            menu.classList.add('hidden');
-            icon.classList.remove('rotate-180');
-
-            // Fetch alat sesuai kategori
-            fetch(`/alat/filter?kategori=${kategori}`)
-                .then(res => res.text())
-                .then(html => {
-                    container.innerHTML = html;
-                })
-                .catch(err => console.error(err));
-        });
-    });
-
-    // Klik luar dropdown → tutup
-    document.addEventListener('click', e => {
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            menu.classList.add('hidden');
-            icon.classList.remove('rotate-180');
-        }
-    });
+    window.closeModal = function() {
+        document.getElementById('modalPinjam').classList.add('hidden');
+    }
 
 });

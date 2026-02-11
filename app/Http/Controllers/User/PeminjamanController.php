@@ -5,35 +5,37 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
-use App\Models\DetailPeminjaman;
 use App\Models\Alat;
 use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
 {
-    public function store(Request $request)
-    {
-        // ✅ Validasi
-        $request->validate([
-            'alat_id'      => 'required|exists:alat,id',
-            'jumlah'       => 'required|integer|min:1',
-            'tgl_pinjam'   => 'required|date',
-            'tgl_kembali'  => 'required|date|after_or_equal:tgl_pinjam',
-        ]);
 
-        $alat = Alat::findOrFail($request->alat_id);
+public function store(Request $request)
+{
+    $request->validate([
+        'id_alat' => 'required|exists:alats,id',
+        'jumlah' => 'required|integer|min:1',
+        'tanggal_kembali' => 'required|date|after_or_equal:today',
+    ]);
 
-        // ✅ Cek stok
-        if ($request->jumlah > $alat->jumlah_tersedia) {
-            return back()->with('error', 'Jumlah melebihi stok tersedia!');
-        }
+    $alat = Alat::findOrFail($request->id_alat);
 
-        // ✅ Simpan ke tabel peminjaman
-        $peminjaman = Peminjaman::create([
-            'user_id'      => Auth::id(),
-            'tgl_pinjam'   => $request->tgl_pinjam,
-            'tgl_kembali'  => $request->tgl_kembali,
-            'status'       => 'menunggu',
-        ]);
+    // CEK STOK
+    if ($request->jumlah > $alat->jumlah_tersedia) {
+        return back()->with('error', 'Stok tidak mencukupi!');
+    }
+
+    // SIMPAN (STATUS MENUNGGU DULU)
+    Peminjaman::create([
+        'user_id' => auth()->id(),
+        'id_alat' => $request->id_alat,
+        'jumlah' => $request->jumlah,
+        'tanggal_pinjam' => now(),
+        'tanggal_kembali' => $request->tanggal_kembali,
+        'status' => 'pending'
+    ]);
+
+    return back()->with('success', 'Pengajuan peminjaman berhasil dikirim!');
 }
 }

@@ -16,7 +16,7 @@
         {{-- KIRI : ILUSTRASI --}}
         <div class="hidden md:flex items-center justify-center bg-blue-50 p-10">
             <img
-                src="{{ asset('img/login-illustration.svg') }}"
+                src="{{ asset('assets/login.png') }}"
                 alt="Login Illustration"
                 class="max-w-sm"
             >

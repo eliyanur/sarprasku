@@ -38,13 +38,23 @@ id="sidebar"
     <div class="flex-1 px-6 space-y-4 mt-4">
 
         <!-- Dashboard -->
-        <a href="{{ route('user.dashboard') }}"
+        <a href="{{ route('petugas.dashboard') }}"
            class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
-           {{ request()->routeIs('user.dashboard')
+           {{ request()->routeIs('petugas.dashboard')
               ? 'bg-white text-blue-600 font-semibold shadow-lg'
               : 'bg-white/20 hover:bg-white/30 transition' }}">
             <i class="fa-solid fa-table-columns text-xl"></i>
             Dashboard
+        </a>
+
+        <!-- Peminjaman -->
+        <a href="{{ route('petugas.peminjaman') }}"
+        class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
+        {{ request()->routeIs('petugas.peminjaman*')
+            ? 'bg-white text-blue-600 font-semibold shadow-lg'
+            : 'bg-white/20 hover:bg-white/30 transition' }}">
+            <i class="fa-solid fa-book text-xl"></i>
+            Data Peminjaman
         </a>
 
         <!-- Alat -->
@@ -58,7 +68,7 @@ id="sidebar"
         </a>
 
         <!-- Riwayat -->
-        <a href="{{route('user.riwayat')}}"
+        <a href="#"
            class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
            {{ request()->routeIs('peminjaman.*')
               ? 'bg-white text-blue-600 font-semibold shadow-lg'
