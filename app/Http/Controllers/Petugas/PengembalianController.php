@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 use App\Models\Pengembalian;
+use App\Models\LogAktivitas;
 
 class PengembalianController extends Controller
 {
@@ -31,6 +32,13 @@ class PengembalianController extends Controller
         // Update status peminjaman
         $peminjaman->status = 'dikembalikan';
         $peminjaman->save();
+
+        LogAktivitas::create([
+        'user_id'   => auth()->id(),
+        'aktivitas' => 'Mengmbalikan alat ' . $peminjaman->alat->nama,
+        'status'    => 'dikembalikan',
+        'waktu'     => now()
+    ]);
 
         // Redirect kembali ke halaman daftar peminjaman petugas
         return redirect()->route('petugas.peminjaman')->with('success', 'Pengembalian berhasil');

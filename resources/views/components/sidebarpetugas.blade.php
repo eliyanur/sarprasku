@@ -57,16 +57,6 @@ id="sidebar"
             Data Peminjaman
         </a>
 
-        <!-- Alat -->
-        <a href="{{route('user.alat')}}"
-           class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
-           {{ request()->routeIs('alat.*')
-              ? 'bg-white text-blue-600 font-semibold shadow-lg'
-              : 'bg-white/20 hover:bg-white/30 transition' }}">
-            <i class="fa-solid fa-book text-xl"></i>
-            Alat
-        </a>
-
         <!-- Riwayat -->
         <a href="#"
            class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
@@ -74,7 +64,7 @@ id="sidebar"
               ? 'bg-white text-blue-600 font-semibold shadow-lg'
               : 'bg-white/20 hover:bg-white/30 transition' }}">
             <i class="fa-solid fa-clock-rotate-left text-xl"></i>
-            Riwayat
+            Laporan
         </a>
 
     </div>

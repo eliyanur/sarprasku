@@ -7,7 +7,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gradient-to-br from-blue-100 via-sky-100 to-indigo-100">
+<body class="bg-gradient-to-b from-indigo-50 to-purple-50">
 
 <div class="min-h-screen flex items-center justify-center px-4">
 

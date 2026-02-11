@@ -3,7 +3,6 @@
     id="sidebar"
     class="fixed left-0 top-0 w-[300px] h-full
            bg-gradient-to-b from-indigo-50 to-purple-50
-           border-l-[10px] border-indigo-500
            shadow-xl
            transition-transform duration-300
            z-40
@@ -35,24 +34,24 @@
            class="flex items-center gap-4 px-5 py-3 rounded-2xl
                   text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
             <i class="fa-solid fa-users"></i>
-            Pengguna
+            Data Pengguna
         </a>
 
         <a href="{{ route('admin.kategori.index') }}"
            class="flex items-center gap-4 px-5 py-3 rounded-2xl
                   text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
             <i class="fa-solid fa-layer-group"></i>
-            Kategori
+            Data Kategori
         </a>
 
         <a href="{{route('admin.alat.index')}}"
            class="flex items-center gap-4 px-5 py-3 rounded-2xl
                   text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
             <i class="fa-solid fa-toolbox"></i>
-            Alat
+            Data Alat
         </a>
 
-        <a href="#"
+        <a href="{{route('admin.logaktivitas')}}"
            class="flex items-center gap-4 px-5 py-3 rounded-2xl
                   text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
             <i class="fa-solid fa-clock-rotate-left"></i>

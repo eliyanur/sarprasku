@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 use App\Models\Alat;
+use App\Models\LogAktivitas;
 use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
@@ -35,6 +36,13 @@ public function store(Request $request)
         'tanggal_kembali' => $request->tanggal_kembali,
         'status' => 'pending'
     ]);
+
+    LogAktivitas::create([
+    'user_id'   => auth()->id(),
+    'aktivitas' => 'Mengajukan peminjaman ' . $alat->nama,
+    'status'    => 'pending',
+    'waktu'     => now()
+]);
 
     return back()->with('success', 'Pengajuan peminjaman berhasil dikirim!');
 }

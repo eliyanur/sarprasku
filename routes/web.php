@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DataAlatController;
+use App\Http\Controllers\Admin\LogAktivitasController;
 use App\Http\Controllers\User\AlatController;
 use App\Http\Controllers\User\PeminjamanController;
 use App\Http\Controllers\User\RiwayatPeminjamanController;
@@ -68,6 +69,11 @@ Route::prefix('admin')
     // hapus kategori
     Route::delete('/kategori/{id}/delete', [KategoriController::class, 'destroy'])
         ->name('kategori.destroy');
+    
+        //LOGAKTIVITAS
+    Route::get('/log', [LogAktivitasController::class, 'index'])
+    ->name('logaktivitas');
+
 });
 
 /* ================= PETUGAS ================= */
