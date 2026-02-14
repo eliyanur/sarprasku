@@ -28,7 +28,7 @@
 
     <!-- Gambar buku -->
     <div class="relative z-10 w-20 sm:w-24 md:w-36 lg:w-40 flex-shrink-0 ml-2 sm:ml-4">
-        <img src="{{ asset('assets/logo_buku.png') }}" alt="Welcome"
+        <img src="{{ asset('assets/logo1.png') }}" alt="Welcome"
             class="w-full drop-shadow-xl">
     </div>
 

@@ -30,6 +30,7 @@ flex flex-col max-w-full shadow-inner">
     {{-- FOOTER petugas --}}
     @include('layout_petugas.partial_petugas.footer')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets_petugas/js/pengembalian.js') }}"></script>

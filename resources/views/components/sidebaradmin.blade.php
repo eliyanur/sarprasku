@@ -23,40 +23,50 @@
     <nav class="px-6 text-sm space-y-2">
 
         <!-- DASHBOARD (ACTIVE) -->
-        <a href="{{route('admin.dashboard')}}"
-           class="flex items-center gap-4 px-5 py-3 rounded-2xl
-                  bg-indigo-100 text-indigo-600 font-semibold shadow-sm">
-            <i class="fa-solid fa-chart-line"></i>
-            Dashboard
-        </a>
+        <a href="{{ route('admin.dashboard') }}"
+            class="flex items-center gap-4 px-5 py-3 rounded-2xl transition
+            {{ request()->routeIs('admin.dashboard') 
+                    ? 'bg-indigo-100 text-indigo-600 font-semibold shadow-sm' 
+                    : 'text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600' }}">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
 
-        <a href="{{route('admin.users.index')}}"
-           class="flex items-center gap-4 px-5 py-3 rounded-2xl
-                  text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
-            <i class="fa-solid fa-users"></i>
-            Data Pengguna
-        </a>
+        <a href="{{ route('admin.users.index') }}"
+            class="flex items-center gap-4 px-5 py-3 rounded-2xl transition
+            {{ request()->routeIs('admin.users.*') 
+                    ? 'bg-indigo-100 text-indigo-600 font-semibold shadow-sm' 
+                    : 'text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600' }}">
+                <i class="fa-solid fa-users"></i>
+                Data Pengguna
+            </a>
 
         <a href="{{ route('admin.kategori.index') }}"
-           class="flex items-center gap-4 px-5 py-3 rounded-2xl
-                  text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
-            <i class="fa-solid fa-layer-group"></i>
-            Data Kategori
-        </a>
+            class="flex items-center gap-4 px-5 py-3 rounded-2xl transition
+            {{ request()->routeIs('admin.kategori.*') 
+                    ? 'bg-indigo-100 text-indigo-600 font-semibold shadow-sm' 
+                    : 'text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600' }}">
+                <i class="fa-solid fa-layer-group"></i>
+                Data Kategori
+            </a>
 
-        <a href="{{route('admin.alat.index')}}"
-           class="flex items-center gap-4 px-5 py-3 rounded-2xl
-                  text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
-            <i class="fa-solid fa-toolbox"></i>
-            Data Alat
-        </a>
+        <a href="{{ route('admin.alat.index') }}"
+            class="flex items-center gap-4 px-5 py-3 rounded-2xl transition
+            {{ request()->routeIs('admin.alat.*') 
+                    ? 'bg-indigo-100 text-indigo-600 font-semibold shadow-sm' 
+                    : 'text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600' }}">
+                <i class="fa-solid fa-toolbox"></i>
+                Data Alat
+            </a>
 
-        <a href="{{route('admin.logaktivitas')}}"
-           class="flex items-center gap-4 px-5 py-3 rounded-2xl
-                  text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600 transition">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            Log Aktivitas
-        </a>
+       <a href="{{ route('admin.logaktivitas') }}"
+            class="flex items-center gap-4 px-5 py-3 rounded-2xl transition
+            {{ request()->routeIs('admin.logaktivitas') 
+                    ? 'bg-indigo-100 text-indigo-600 font-semibold shadow-sm' 
+                    : 'text-slate-600 hover:bg-indigo-100/70 hover:text-indigo-600' }}">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Log Aktivitas
+            </a>
     </nav>
 
     <!-- LOGOUT -->

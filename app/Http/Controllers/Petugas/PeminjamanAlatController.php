@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Petugas;
 
 use App\Http\Controllers\Controller;
+use App\Models\Alat;
 use App\Models\Peminjaman;
 use App\Models\LogAktivitas;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -25,23 +27,20 @@ class PeminjamanAlatController extends Controller
         return view('petugas.peminjaman', compact('peminjaman'));
     }
 
-    // SETUJUI
-    public function setujui($id)
-    {
-        $peminjaman = Peminjaman::findOrFail($id);
+  public function setujui($id)
+{
+    $peminjaman = Peminjaman::findOrFail($id);
+    $alat = Alat::findOrFail($peminjaman->id_alat);
 
-        $peminjaman->status = 'disetujui';
-        $peminjaman->save();
-        
-         LogAktivitas::create([
-        'user_id'   => auth()->id(),
-        'aktivitas' => 'Menyetujui peminjaman ' . $peminjaman->alat->nama,
-        'status'    => 'disetujui',
-        'waktu'     => now()
-    ]);
+    $alat->jumlah_tersedia -= $peminjaman->jumlah;
+    $alat->save();
 
-        return back()->with('success', 'Peminjaman berhasil disetujui');
-    }
+    $peminjaman->status = 'disetujui';
+    $peminjaman->save();
+
+    return back();
+}
+
 
     // TOLAK
     public function tolak($id)
@@ -53,7 +52,7 @@ class PeminjamanAlatController extends Controller
        
         LogAktivitas::create([
         'user_id'   => auth()->id(),
-        'aktivitas' => 'Menolak peminjaman ' . $peminjaman->alat->nama,
+        'aktivitas' => 'Menolak peminjaman ' . $peminjaman->alat->nama_alat,
         'status'    => 'ditolak',
         'waktu'     => now()
     ]);
@@ -61,20 +60,44 @@ class PeminjamanAlatController extends Controller
         return back()->with('success', 'Peminjaman berhasil ditolak');
     }
 
-    // KEMBALIKAN
-    public function kembalikan($id)
-    {
-        $peminjaman = Peminjaman::findOrFail($id);
+   public function kembalikan($id)
+{
+    DB::beginTransaction();
 
+    try {
+
+        $peminjaman = Peminjaman::lockForUpdate()->findOrFail($id);
+
+        // CEK STATUS
+        if ($peminjaman->status !== 'disetujui') {
+            return back()->with('error', 'Belum bisa dikembalikan');
+        }
+
+        $alat = Alat::lockForUpdate()->findOrFail($peminjaman->id_alat);
+
+        // TAMBAH STOK
+        $alat->jumlah_tersedia += $peminjaman->jumlah;
+        $alat->save();
+
+        // UPDATE STATUS
         $peminjaman->status = 'dikembalikan';
         $peminjaman->save();
 
-         LogAktivitas::create([
-        'user_id'   => auth()->id(),
-        'aktivitas' => 'Mengmbalikan alat ' . $peminjaman->alat->nama,
-        'status'    => 'dikembalikan',
-        'waktu'     => now()
-    ]);
-        return redirect()->route('petugas.peminjaman')->with('success', 'Pengembalian berhasil');
+        LogAktivitas::create([
+            'user_id'   => auth()->id(),
+            'aktivitas' => 'Mengembalikan alat ' . $alat->nama_alat,
+            'status'    => 'dikembalikan',
+            'waktu'     => now()
+        ]);
+
+        DB::commit();
+
+        return redirect()->route('petugas.peminjaman')
+            ->with('success', 'Pengembalian berhasil');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->with('error', 'Terjadi kesalahan');
     }
+}
 }

@@ -39,11 +39,13 @@ public function store(Request $request)
 
     LogAktivitas::create([
     'user_id'   => auth()->id(),
-    'aktivitas' => 'Mengajukan peminjaman ' . $alat->nama,
+    'aktivitas' => 'Mengajukan peminjaman ' . $alat->nama_alat,
     'status'    => 'pending',
     'waktu'     => now()
 ]);
 
-    return back()->with('success', 'Pengajuan peminjaman berhasil dikirim!');
+    return redirect()->route('user.alat')
+    ->with('success', 'Pengajuan peminjaman berhasil dikirim!');
+
 }
 }

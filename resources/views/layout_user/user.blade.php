@@ -30,10 +30,19 @@ flex flex-col max-w-full shadow-inner">
     {{-- FOOTER USER --}}
     @include('layout_user.partial_user.footer')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+    <script>
+    window.flashData = {
+        success: @json(session('success')),
+        error: @json(session('error'))
+    };
+    </script>
     <script src="{{ asset('assets_user/js/alat.js') }}"></script>
     <script src="{{ asset('assets_user/js/sidebaruser.js') }}"></script>
+    <script src="{{ asset('assets_user/js/navbar.js') }}"></script>
+
     @stack('scripts')
 </body>
 </html>

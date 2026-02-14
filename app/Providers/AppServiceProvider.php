@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Peminjaman;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('*', function ($view) {
+        if (Auth::check()) {
+            $notifs = Peminjaman::where('user_id', Auth::id())
+                ->where('status', 'disetujui')
+                ->whereDate('tanggal_kembali', '<', now())
+                ->get();
+
+            $view->with('notif_terlambat', $notifs);
+        }
+    });
     }
 }

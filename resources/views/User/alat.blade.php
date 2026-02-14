@@ -100,7 +100,7 @@
 
         <h2 class="text-lg font-semibold mb-4">Form Peminjaman</h2>
 
-        <form action="{{ route('user.peminjaman.store') }}" method="POST">
+        <form action="{{ route('user.peminjaman.store') }}" method="POST" novalidate>
             @csrf
 
             <input type="hidden" name="id_alat" id="modal_id_alat">

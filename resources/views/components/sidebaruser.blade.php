@@ -50,7 +50,7 @@ id="sidebar"
         <!-- Alat -->
         <a href="{{route('user.alat')}}"
            class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
-           {{ request()->routeIs('alat.*')
+           {{ request()->routeIs('user.alat')
               ? 'bg-white text-blue-600 font-semibold shadow-lg'
               : 'bg-white/20 hover:bg-white/30 transition' }}">
             <i class="fa-solid fa-book text-xl"></i>
@@ -60,7 +60,7 @@ id="sidebar"
         <!-- Riwayat -->
         <a href="{{route('user.riwayat')}}"
            class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
-           {{ request()->routeIs('peminjaman.*')
+           {{ request()->routeIs('user.riwayat')
               ? 'bg-white text-blue-600 font-semibold shadow-lg'
               : 'bg-white/20 hover:bg-white/30 transition' }}">
             <i class="fa-solid fa-clock-rotate-left text-xl"></i>

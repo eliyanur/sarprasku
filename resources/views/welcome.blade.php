@@ -78,25 +78,28 @@ class="pt-36 pb-20 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-cente
         </div>
     </div>
 
-    <!-- ILUSTRASI -->
-    <div class="flex justify-center">
+   <!-- ILUSTRASI -->
+<div class="flex justify-center">
 
-        <div class="relative">
+    <div class="relative">
 
-            <!-- Glow -->
-            <div class="absolute -inset-10 bg-blue-300 rounded-full blur-3xl opacity-30"></div>
+        <!-- Glow -->
+        <div class="absolute -inset-10 bg-blue-300 rounded-full blur-3xl opacity-30"></div>
 
-            <div class="relative w-72 h-72 rounded-full 
-                        bg-gradient-to-br from-blue-200 to-indigo-200
-                        flex items-center justify-center
-                        shadow-2xl">
+        <div class="relative w-72 h-72 rounded-full 
+                    bg-gradient-to-br from-blue-100 to-indigo-50
+                    flex items-center justify-center
+                    shadow-2xl">
 
-                <i class="fa-solid fa-toolbox text-blue-700 text-6xl"></i>
+            <img src="{{ asset('assets/logo1.png') }}" 
+                 alt="Ilustrasi Sarpras"
+                 class="w-40 h-40 object-contain">
 
-            </div>
         </div>
-
     </div>
+
+</div>
+
 </section>
 
 <!-- KEUNGGULAN -->
