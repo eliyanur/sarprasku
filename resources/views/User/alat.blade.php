@@ -3,25 +3,62 @@
 
 @section('content')
 
-{{-- FILTER --}}
-<form method="GET" class="mb-6 flex flex-col sm:flex-row gap-3">
-    <select name="kategori" class="w-full sm:w-64 rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500">
-        <option value="Semua" {{ $kategori == 'Semua' ? 'selected' : '' }}>Semua Kategori</option>
-        @foreach ($data_kategori as $kat)
-            <option value="{{ $kat->nama_kategori }}" {{ $kategori == $kat->nama_kategori ? 'selected' : '' }}>
-                {{ $kat->nama_kategori }}
-            </option>
-        @endforeach
-    </select>
+<form method="GET"
+      class="mb-8 flex flex-col sm:flex-row items-center gap-4">
 
-    <button class="px-5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">Filter</button>
+    {{-- FILTER KATEGORI --}}
+    <div class="w-full sm:w-64">
+        <select name="kategori"
+            onchange="this.form.submit()"
+            class="w-full py-2.5 px-4 border border-slate-300 rounded-xl 
+                   focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                   transition">
+
+            <option value="Semua" {{ $kategori == 'Semua' ? 'selected' : '' }}>
+                Semua Kategori
+            </option>
+
+            @foreach ($data_kategori as $kat)
+                <option value="{{ $kat->nama_kategori }}"
+                    {{ $kategori == $kat->nama_kategori ? 'selected' : '' }}>
+                    {{ $kat->nama_kategori }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+     <!-- SPACER -->
+    <div class="hidden sm:flex flex-1"></div>
+    
+{{-- SEARCH --}}
+    <div class="relative w-full sm:w-80">
+        <span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+            <!-- ICON SEARCH -->
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 class="h-5 w-5" 
+                 fill="none" 
+                 viewBox="0 0 24 24" 
+                 stroke="currentColor">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z" />
+            </svg>
+        </span>
+
+        <input type="text"
+            id="searchInput"
+            placeholder="Cari alat..."
+            class="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-xl 
+                   focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                   transition">
+    </div>
 </form>
 
 {{-- LIST ALAT --}}
 @if ($alat->count())
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($alat as $item)
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 
+            <div class="alat-item bg-white rounded-2xl shadow-md border border-slate-100 
                         overflow-hidden hover:shadow-xl hover:-translate-y-1 
                         transition-all duration-300">
 
@@ -34,7 +71,7 @@
 
                 {{-- ISI --}}
                 <div class="p-5">
-                    <h3 class="font-semibold text-slate-800 text-lg mb-1">
+                    <h3 class="nama-alat font-semibold text-slate-800 text-lg mb-1">
                         {{ $item->nama_alat }}
                     </h3>
 

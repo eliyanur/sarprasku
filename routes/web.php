@@ -12,6 +12,7 @@ use App\Http\Controllers\User\PeminjamanController;
 use App\Http\Controllers\User\RiwayatPeminjamanController;
 use App\Http\Controllers\Petugas\PeminjamanAlatController;
 use App\Http\Controllers\Petugas\PengembalianController;
+use App\Http\Controllers\Petugas\LaporanController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardPetugasController;
@@ -84,14 +85,24 @@ Route::prefix('petugas')
 
         Route::get('/dashboard', [DashboardPetugasController::class, 'index'])
             ->name('dashboard');
-         Route::get('/peminjaman', [PeminjamanAlatController::class, 'index'])
-        ->name('peminjaman');
+        Route::get('/peminjaman', [PeminjamanAlatController::class, 'index'])
+            ->name('peminjaman');
         Route::post('/peminjaman/{id}/setujui', [PeminjamanAlatController::class, 'setujui'])
-        ->name('peminjaman.setujui');
+            ->name('peminjaman.setujui');
         Route::post('/peminjaman/{id}/tolak', [PeminjamanAlatController::class, 'tolak'])
-        ->name('peminjaman.tolak');
+            ->name('peminjaman.tolak');
          Route::post('/peminjaman/kembalikan/{id}', [PeminjamanAlatController::class, 'kembalikan'])
-        ->name('peminjaman.kembalikan');
+            ->name('peminjaman.kembalikan');
+        Route::post('/petugas/unblock/{id}', [UserController::class, 'unblock'])
+            ->name('unblock');
+        Route::get('/laporan', [LaporanController::class, 'index'])
+            ->name('laporan');
+        Route::get('/petugas/laporan/pdf', [LaporanController::class, 'exportPDF'])
+            ->name('laporan.pdf');
+        Route::get('/petugas/laporan/excel', [LaporanController::class, 'exportExcel'])
+            ->name('laporan.excel');
+
+
 });
 
 /* ================= USER / PEMINJAM ================= */
@@ -109,6 +120,7 @@ Route::prefix('user')
         Route::get('/riwayat', [RiwayatPeminjamanController::class, 'index'])
         ->name('riwayat');
 });
+
 
 /* ================= PROFILE (SEMUA ROLE) ================= */
 Route::middleware('auth')->group(function () {

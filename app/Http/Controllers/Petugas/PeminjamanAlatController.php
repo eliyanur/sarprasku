@@ -13,19 +13,23 @@ use Carbon\Carbon;
 class PeminjamanAlatController extends Controller
 {
     public function index(Request $request)
-    {
-        $status = $request->status;
+{
+    $status = $request->status;
 
-        $query = Peminjaman::with(['user', 'alat']);
+    $query = Peminjaman::with(['user', 'alat']);
 
-        if ($status) {
-            $query->where('status', $status);
-        }
-
-        $peminjaman = $query->latest()->get();
-
-        return view('petugas.peminjaman', compact('peminjaman'));
+    if ($status == 'terlambat') {
+        $query->where('status', 'disetujui')
+              ->whereDate('tanggal_kembali', '<', today());
+    } 
+    elseif ($status) {
+        $query->where('status', $status);
     }
+
+    $peminjaman = $query->latest()->get();
+
+    return view('petugas.peminjaman', compact('peminjaman'));
+}
 
   public function setujui($id)
 {
@@ -60,7 +64,7 @@ class PeminjamanAlatController extends Controller
         return back()->with('success', 'Peminjaman berhasil ditolak');
     }
 
-   public function kembalikan($id)
+   public function kembalikan(Request $request,$id)
 {
     DB::beginTransaction();
 
@@ -89,6 +93,11 @@ class PeminjamanAlatController extends Controller
             'status'    => 'dikembalikan',
             'waktu'     => now()
         ]);
+
+        if ($request->kondisi == 'rusak' || $request->kondisi == 'hilang') {
+        $peminjaman->user->is_blocked = true;
+        $peminjaman->user->save();
+    }
 
         DB::commit();
 

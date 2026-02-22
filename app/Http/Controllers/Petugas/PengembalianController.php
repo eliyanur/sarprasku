@@ -20,7 +20,7 @@ class PengembalianController extends Controller
         'kondisi' => 'required|in:baik,rusak,hilang',
     ]);
 
-    $peminjaman = Peminjaman::findOrFail($id);
+    $peminjaman = Peminjaman::with('user')->findOrFail($id);
     $alat = Alat::findOrFail($peminjaman->id_alat);
 
     // TAMBAH STOK
@@ -33,8 +33,15 @@ class PengembalianController extends Controller
         'kondisi' => $request->kondisi
     ]);
 
+    // UPDATE STATUS
     $peminjaman->status = 'dikembalikan';
     $peminjaman->save();
+
+    // TAMBAHAN BLOCK USER
+    if ($request->kondisi == 'rusak' || $request->kondisi == 'hilang') {
+        $peminjaman->user->is_blocked = true;
+        $peminjaman->user->save();
+    }
 
     return redirect()->route('petugas.peminjaman')
         ->with('success', 'Pengembalian berhasil');

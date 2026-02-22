@@ -28,7 +28,7 @@
 
     <!-- Gambar buku -->
     <div class="relative z-10 w-20 sm:w-24 md:w-36 lg:w-40 flex-shrink-0 ml-2 sm:ml-4">
-        <img src="{{ asset('assets/logo1.png') }}" alt="Welcome"
+        <img src="{{ asset('assets/logo.png') }}" alt="Welcome"
             class="w-full drop-shadow-xl">
     </div>
 
@@ -49,7 +49,7 @@
 
         <div class="ml-[78px] mt-[4px] leading-tight relative z-10">
             <p class="text-sm text-white font-medium">Sedang dipinjam</p>
-            <h3 class="text-lg font-mochiy text-white">Alat</h3>
+            <h3 class="text-lg font-mochiy text-white"> {{ $sedangDipinjam }} Alat</h3>
         </div>
     </div>
 
@@ -61,7 +61,7 @@
 
         <div class="ml-[78px] mt-[4px] leading-tight relative z-10">
             <p class="text-sm text-white font-medium">Telat Pengembalian</p>
-            <h3 class="text-lg font-mochiy text-white">Alat</h3>
+            <h3 class="text-lg font-mochiy text-white">{{ $telat }} Alat</h3>
         </div>
     </div>
 
@@ -73,7 +73,7 @@
 
         <div class="ml-[78px] mt-[4px] leading-tight relative z-10">
             <p class="text-sm text-white font-medium">Alat Tersedia</p>
-            <h3 class="text-lg font-mochiy text-white">Alat</h3>
+            <h3 class="text-lg font-mochiy text-white">{{ $alatTersedia }} Alat</h3>
         </div>
     </div>
 

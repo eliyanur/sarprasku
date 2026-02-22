@@ -33,18 +33,40 @@
                     <td>{{ $item->tanggal_pinjam }}</td>
                     <td>{{ $item->tanggal_kembali }}</td>
                     <td>
-                        <span class="px-3 py-1 text-xs font-semibold rounded-full
-                            @if($item->status == 'pending') bg-yellow-100 text-yellow-700
-                            @elseif($item->status == 'disetujui') bg-green-100 text-green-700
-                            @elseif($item->status == 'ditolak') bg-red-100 text-red-700
-                            @elseif($item->status == 'dikembalikan') bg-blue-100 text-blue-700
-                            @elseif($item->status == 'terlambat') bg-orange-100 text-orange-700
-                            @elseif($item->status == 'rusak' || $item->status == 'hilang') bg-red-200 text-red-800
-                            @else bg-gray-100 text-gray-700
-                            @endif">
-                            {{ ucfirst($item->status) }}
+                    @php
+                        $terlambatHari = 0;
+
+                        if ($item->status == 'disetujui' 
+                            && $item->tanggal_kembali < date('Y-m-d')) {
+
+                            $terlambatHari = \Carbon\Carbon::parse($item->tanggal_kembali)
+                                                ->diffInDays(\Carbon\Carbon::today());
+                        }
+                    @endphp
+
+                    @if($item->status == 'dikembalikan')
+                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">
+                            Dikembalikan
                         </span>
-                    </td>
+
+                    @elseif($terlambatHari > 0)
+                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm">
+                            Terlambat
+                        </span>
+                        <small class="text-xs text-red-500 block">
+                            Terlambat {{ $terlambatHari }} hari
+                        </small>
+
+                    @elseif($item->status == 'pending')
+                        <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm">
+                            Pending
+                        </span>
+
+                    @else
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">
+                            Disetujui
+                        </span>
+                    @endif
                     <td>
                         @if($item->status == 'dikembalikan')
                             Baik

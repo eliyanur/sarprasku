@@ -18,11 +18,10 @@
         <div class="flex justify-between items-center">
             <div>
                 <p class="text-sm opacity-80">Total Peminjaman</p>
-                <h2 class="text-3xl font-bold mt-1">120</h2>
+                <h2 class="text-3xl font-bold mt-1">{{ $total }}</h2>
             </div>
             <i class="fa-solid fa-file-lines text-3xl opacity-70"></i>
         </div>
-        <p class="text-xs mt-4 text-indigo-100">+12% dari bulan lalu</p>
     </div>
 
     <!-- MENUNGGU -->
@@ -30,23 +29,21 @@
         <div class="flex justify-between items-center">
             <div>
                 <p class="text-sm opacity-80">Menunggu Persetujuan</p>
-                <h2 class="text-3xl font-bold mt-1">8</h2>
+                <h2 class="text-3xl font-bold mt-1">{{ $menunggu }}</h2>
             </div>
             <i class="fa-solid fa-hourglass-half text-3xl opacity-70"></i>
         </div>
-        <p class="text-xs mt-4 text-sky-100">Perlu tindakan admin</p>
-    </div>
+         </div>
 
     <!-- DISETUJUI -->
     <div class="p-6 rounded-3xl bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 text-white shadow-lg">
         <div class="flex justify-between items-center">
             <div>
                 <p class="text-sm opacity-80">Disetujui</p>
-                <h2 class="text-3xl font-bold mt-1">92</h2>
+                <h2 class="text-3xl font-bold mt-1">{{ $disetujui }}</h2>
             </div>
             <i class="fa-solid fa-circle-check text-3xl opacity-70"></i>
         </div>
-        <p class="text-xs mt-4 text-blue-100">Sedang dipinjam</p>
     </div>
 
     <!-- SELESAI -->
@@ -54,11 +51,10 @@
         <div class="flex justify-between items-center">
             <div>
                 <p class="text-sm opacity-80">Dikembalikan</p>
-                <h2 class="text-3xl font-bold mt-1">20</h2>
+                <h2 class="text-3xl font-bold mt-1">{{ $dikembalikan }}</h2>
             </div>
             <i class="fa-solid fa-box-archive text-3xl opacity-70"></i>
         </div>
-        <p class="text-xs mt-4 text-cyan-100">Alat telah dikembalikan</p>
     </div>
 
 </div>
@@ -85,6 +81,16 @@
             <!-- Fake Line Chart -->
             <div class="absolute bottom-10 left-10 right-6">
                 <div class="relative h-36">
+                    @php
+                        $max = max($bulanan->toArray() ?: [1]);
+                        $points = '';
+                        foreach(range(1,12) as $i => $bulan){
+                            $x = $i * 25;
+                            $y = 100 - (($bulanan[$bulan] ?? 0) / $max * 100);
+                            $points .= "$x,$y ";
+                        }
+                    @endphp
+
                     <svg class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
                         <polyline
                             fill="none"
@@ -92,7 +98,7 @@
                             stroke-width="4"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            points="0,80 40,60 80,65 120,40 160,50 200,30 240,45 280,20 300,35"
+                            points="{{ $points }}"
                         />
                     </svg>
                 </div>
@@ -131,36 +137,35 @@
         </h3>
 
         <ul class="space-y-4 text-sm">
+@foreach($terbaru as $item)
+<li class="flex justify-between items-center p-3 rounded-xl hover:bg-slate-50 transition">
+    <span class="font-medium text-slate-600">
+        {{ $item->user->name }}
+    </span>
 
-            <li class="flex justify-between items-center p-3 rounded-xl hover:bg-slate-50 transition">
-                <span class="font-medium text-slate-600">Ahmad</span>
-                <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-600 text-xs font-medium">
-                    Menunggu
-                </span>
-            </li>
+    @if($item->status == 'pending')
+        <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-600 text-xs font-medium">
+            Menunggu
+        </span>
 
-            <li class="flex justify-between items-center p-3 rounded-xl hover:bg-slate-50 transition">
-                <span class="font-medium text-slate-600">Siti</span>
-                <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-medium">
-                    Disetujui
-                </span>
-            </li>
+    @elseif($item->status == 'disetujui')
+        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-medium">
+            Disetujui
+        </span>
 
-            <li class="flex justify-between items-center p-3 rounded-xl hover:bg-slate-50 transition">
-                <span class="font-medium text-slate-600">Budi</span>
-                <span class="px-3 py-1 rounded-full bg-green-100 text-green-600 text-xs font-medium">
-                    Dikembalikan
-                </span>
-            </li>
+    @elseif($item->status == 'dikembalikan')
+        <span class="px-3 py-1 rounded-full bg-green-100 text-green-600 text-xs font-medium">
+            Dikembalikan
+        </span>
 
-            <li class="flex justify-between items-center p-3 rounded-xl hover:bg-slate-50 transition">
-                <span class="font-medium text-slate-600">Ani</span>
-                <span class="px-3 py-1 rounded-full bg-green-100 text-green-600 text-xs font-medium">
-                    Dikembalikan
-                </span>
-            </li>
-
-        </ul>
+    @else
+        <span class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-medium">
+            {{ ucfirst($item->status) }}
+        </span>
+    @endif
+</li>
+@endforeach
+</ul>
     </div>
 
 </div>

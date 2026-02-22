@@ -15,20 +15,11 @@
     class="fixed inset-0 bg-black/40 backdrop-blur-sm
            hidden z-20 md:hidden">
 </div>
-
-    <!-- RIGHT -->
-    <div class="flex items-center gap-6 ml-auto">
-
-        <!-- NOTIFICATION -->
-        <button
-            class="relative w-10 h-10 rounded-xl
-                   bg-slate-100 hover:bg-slate-200
-                   flex items-center justify-center transition">
-            <i class="fa-regular fa-bell text-slate-600"></i>
-            <span
-                class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full">
-            </span>
-        </button>
-
+ <h1
+    class="absolute left-1/2 -translate-x-1/2
+    md:static md:translate-x-0
+    text-lg md:text-xl font-bold text-indigo-500">
+    @yield('pageTitle', 'Dashboard Petugas')
+</h1>
     </div>
 </header>

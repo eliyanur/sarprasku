@@ -19,38 +19,31 @@
     <!-- RIGHT -->
     <div class="flex items-center gap-6 ml-auto">
 
-        <!-- NOTIFICATION -->
-        <button
-            class="relative w-10 h-10 rounded-xl
-                   bg-slate-100 hover:bg-slate-200
-                   flex items-center justify-center transition">
-            <i class="fa-regular fa-bell text-slate-600"></i>
-            <span
-                class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full">
-            </span>
-        </button>
 
         <!-- PROFILE -->
-        <div
-            class="flex items-center gap-3
-                   bg-slate-100 px-3 py-2 rounded-xl cursor-pointer">
+@auth
+@if(Auth::user()->role === 'admin')
+<div
+    class="flex items-center gap-3
+           bg-white/60 backdrop-blur-md
+           px-4 py-2 rounded-xl
+           shadow-sm border border-white/40
+           hover:bg-white/80 transition">
 
-            <img
-                src="https://i.pravatar.cc/40"
-                alt="profile"
-                class="w-9 h-9 rounded-full object-cover">
+    <p class="text-sm font-semibold text-slate-700">
+        {{ Auth::user()->name }}
+    </p>
 
-            <div class="leading-tight">
-                <p class="text-sm font-semibold text-slate-700">
-                    Admin
-                </p>
-                <p class="text-xs text-slate-500">
-                    Administrator
-                </p>
-            </div>
+    <span
+        class="text-[10px] font-semibold tracking-wide
+               text-indigo-600 bg-indigo-100
+               px-2 py-0.5 rounded-full">
+        ADMIN
+    </span>
+</div>
+@endif
+@endauth
 
-            <i class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
-        </div>
 
     </div>
 </header>

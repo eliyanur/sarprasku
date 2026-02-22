@@ -4,7 +4,7 @@
     <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-3 md:gap-0">
 
 <div class="flex items-center space-x-3">
-<img src="{{asset('assets/footer.png')}}"
+<img src="{{asset('assets/logo.png')}}"
      alt="Logo Footer Dashboard"
      class="w-12 h-12 object-contain">
 

@@ -16,6 +16,22 @@
             </p>
         </div>
 
+        <!-- FOTO ALAT -->
+<div class="mb-6 flex justify-center">
+    @if($alat->gambar)
+        <img
+            src="{{ asset('storage/' . $alat->gambar) }}"
+            alt="Foto {{ $alat->nama_alat }}"
+            class="w-48 h-48 object-cover rounded-2xl shadow-md border"
+        >
+    @else
+        <div class="w-48 h-48 flex items-center justify-center
+                    rounded-2xl bg-slate-100 text-slate-400 text-sm">
+            Tidak ada foto
+        </div>
+    @endif
+</div>
+
         <!-- CONTENT -->
         <div class="space-y-4 text-sm">
 

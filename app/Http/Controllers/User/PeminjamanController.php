@@ -14,6 +14,10 @@ class PeminjamanController extends Controller
 
 public function store(Request $request)
 {
+    if (auth()->user()->is_blocked) {
+    return back()->with('error', 'Akun Anda sedang diblokir sementara.');
+}
+
     $request->validate([
         'id_alat' => 'required|exists:alats,id',
         'jumlah' => 'required|integer|min:1',

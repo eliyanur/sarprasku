@@ -6,156 +6,221 @@
     <title>SarprasKu</title>
 
     @vite(['resources/css/app.css'])
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body class="bg-gradient-to-br from-indigo-50 via-white to-blue-50 text-slate-800 scroll-smooth">
 
-<!-- NAVBAR -->
-<nav class="fixed w-full z-50 bg-white/70 backdrop-blur-lg border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+<nav class="fixed top-0 inset-x-0 z-50
+            h-16
+            bg-white/80 backdrop-blur
+            border-b border-slate-200">
 
-        <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+    <div class="max-w-7xl mx-auto px-5 h-full
+                flex items-center justify-between">
+
+        <!-- LOGO -->
+        <span class="font-bold text-blue-600 text-lg">
             SARPRASKU
-        </h1>
+        </span>
 
+        <!-- MENU DESKTOP -->
         <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
-            <a href="#home" class="hover:text-blue-600 transition">Beranda</a>
-            <a href="#alat" class="hover:text-blue-600 transition">Daftar Alat</a>
-            <a href="#cara" class="hover:text-blue-600 transition">Cara Peminjaman</a>
+            <a href="#home" class="hover:text-blue-600">Beranda</a>
+            <a href="#keunggulan" class="hover:text-blue-600">Keunggulan</a>
         </div>
 
         <a href="{{ route('login') }}"
-           class="px-5 py-2 bg-gradient-to-r from-blue-500 to-indigo-600
-                  text-white rounded-xl text-sm font-semibold
-                  shadow-md hover:shadow-lg
-                  transition transform hover:-translate-y-0.5">
+           class="block text-center px-4 py-2 rounded-xl
+                  bg-blue-600 text-white font-semibold">
+            Login
+        </a>
+        <!-- HAMBURGER BUTTON (MOBILE) -->
+        <button id="hamburger"
+                class="md:hidden flex flex-col gap-1.5">
+            <span class="w-6 h-0.5 bg-slate-700"></span>
+            <span class="w-6 h-0.5 bg-slate-700"></span>
+            <span class="w-6 h-0.5 bg-slate-700"></span>
+        </button>
+    </div>
+
+    <!-- MENU MOBILE -->
+    <div id="mobile-menu"
+         class="hidden md:hidden
+                bg-white border-t border-slate-200
+                px-5 py-4 space-y-4">
+
+        <a href="#home"
+           class="block text-slate-700 font-medium hover:text-blue-600">
+            Beranda
+        </a>
+
+        <a href="#keunggulan"
+           class="block text-slate-700 font-medium hover:text-blue-600">
+            Keunggulan
+        </a>
+
+        <a href="{{ route('login') }}"
+           class="block text-center px-4 py-2 rounded-xl
+                  bg-blue-600 text-white font-semibold">
             Login
         </a>
     </div>
 </nav>
 
-
+<!-- HERO -->
 <section id="home"
-class="pt-36 pb-20 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative">
+class="relative
+       pt-24 pb-16
+       px-5
+       max-w-7xl mx-auto
+       flex flex-col items-center gap-8
+       md:grid md:grid-cols-2 md:gap-12
+       md:pt-36 md:pb-24">
 
-    <!-- Background Blur Effect -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] 
-                bg-blue-200 rounded-full blur-3xl opacity-30 -z-10">
+    <!-- Background Blur -->
+    <div class="absolute top-32 left-1/2 -translate-x-1/2
+            w-48 h-48
+            md:w-[600px] md:h-[600px]
+            bg-blue-200 rounded-full blur-3xl opacity-30 -z-10">
+</div>
+
+
+    <!-- LOGO (MOBILE FIRST) -->
+    <div class="flex justify-center mb-8 md:mb-0">
+        <div class="relative">
+
+            <div class="absolute -inset-10 md:-inset-16
+                        bg-gradient-to-r from-blue-400 to-indigo-400
+                        rounded-full blur-3xl opacity-40"></div>
+
+           <img src="{{ asset('assets/logo.png') }}"
+     alt="Logo SarprasKu"
+     class="w-28 h-28
+            md:w-60 md:h-60
+            object-contain drop-shadow-xl">
+
+        </div>
     </div>
 
     <!-- TEXT -->
-    <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-            Sistem Peminjaman  
-            <span class="bg-gradient-to-r from-blue-600 to-indigo-600 
+    <div class="text-center md:text-left">
+
+        <h1 class="text-2xl md:text-5xl font-extrabold leading-tight">
+            Sistem Peminjaman
+            <span class="block bg-gradient-to-r from-blue-600 to-indigo-600
                          bg-clip-text text-transparent">
                 Alat Sarpras
             </span>
         </h1>
 
-        <p class="mt-6 text-slate-600 text-lg leading-relaxed max-w-lg">
-            Kelola peminjaman alat sekolah dengan lebih cepat, lebih rapi,
-            dan transparan tanpa ribet administrasi manual.
+        <p class="mt-4 md:mt-6
+                  text-slate-600
+                  text-sm md:text-lg
+                  leading-relaxed
+                  max-w-md mx-auto md:mx-0">
+            Kelola peminjaman alat sekolah dengan lebih cepat,
+            lebih rapi, dan transparan tanpa ribet administrasi manual.
         </p>
 
-        <div class="mt-10 flex gap-4 flex-wrap">
+        <div class="mt-6 md:mt-10 flex justify-center md:justify-start">
             <a href="{{ route('login') }}"
-               class="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600
+               class="px-6 py-3
+                      bg-gradient-to-r from-blue-500 to-indigo-600
                       text-white rounded-xl font-semibold
-                      shadow-md hover:shadow-xl
-                      transition transform hover:-translate-y-1">
+                      shadow-md hover:shadow-xl transition">
                 Ajukan Peminjaman
             </a>
-
-            <a href="#cara"
-               class="px-6 py-3 border border-blue-600 text-blue-600
-                      rounded-xl font-semibold
-                      hover:bg-blue-600 hover:text-white
-                      transition">
-                Lihat Cara
-            </a>
         </div>
     </div>
-
-   <!-- ILUSTRASI -->
-<div class="flex justify-center">
-
-    <div class="relative">
-
-        <!-- Glow -->
-        <div class="absolute -inset-10 bg-blue-300 rounded-full blur-3xl opacity-30"></div>
-
-        <div class="relative w-72 h-72 rounded-full 
-                    bg-gradient-to-br from-blue-100 to-indigo-50
-                    flex items-center justify-center
-                    shadow-2xl">
-
-            <img src="{{ asset('assets/logo1.png') }}" 
-                 alt="Ilustrasi Sarpras"
-                 class="w-40 h-40 object-contain">
-
-        </div>
-    </div>
-
-</div>
 
 </section>
 
 <!-- KEUNGGULAN -->
-<section class="py-24 px-8 bg-white">
+<section id="keunggulan"
+class="py-20 md:py-28 px-6 md:px-8
+       bg-gradient-to-br from-slate-50 to-blue-50">
+
     <div class="max-w-6xl mx-auto text-center">
 
-        <h2 class="text-3xl font-bold mb-14">
-            Kenapa Pakai Sistem Ini?
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
+            Kenapa Memilih  
+            <span class="bg-gradient-to-r from-blue-600 to-indigo-600 
+                         bg-clip-text text-transparent">
+                Sistem SarprasKu?
+            </span>
         </h2>
 
-        <div class="grid md:grid-cols-3 gap-10">
+        <p class="text-slate-600 max-w-2xl mx-auto mb-14 text-base md:text-lg">
+            Solusi digital untuk pengelolaan peminjaman sarana dan prasarana
+            yang efisien, transparan, dan terintegrasi.
+        </p>
 
-            <div class="group bg-white p-8 rounded-3xl shadow-sm border border-slate-100
-                        hover:shadow-xl transition duration-300">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
-                <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center
-                            mb-6 group-hover:scale-110 transition">
-                    <i class="fa-solid fa-bolt text-blue-600 text-xl"></i>
+            <!-- CARD -->
+            <div class="bg-white/80 backdrop-blur-lg p-8 rounded-3xl
+                        shadow-md hover:shadow-xl
+                        transition">
+
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br 
+                            from-blue-500 to-indigo-600
+                            flex items-center justify-center
+                            mb-6 mx-auto">
+                    <i class="fa-solid fa-bolt text-white text-2xl"></i>
                 </div>
 
-                <h3 class="font-semibold text-lg mb-3">Cepat & Praktis</h3>
+                <h3 class="font-semibold text-lg mb-3">
+                    Proses Cepat & Efisien
+                </h3>
 
                 <p class="text-slate-600 leading-relaxed">
-                    Proses peminjaman tanpa ribet dan bisa dilakukan kapan saja.
+                    Pengajuan peminjaman dilakukan secara online
+                    tanpa proses manual.
                 </p>
             </div>
 
+            <!-- CARD -->
+            <div class="bg-white/80 backdrop-blur-lg p-8 rounded-3xl
+                        shadow-md hover:shadow-xl
+                        transition">
 
-            <div class="group bg-white p-8 rounded-3xl shadow-sm border border-slate-100
-                        hover:shadow-xl transition duration-300">
-
-                <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center
-                            mb-6 group-hover:scale-110 transition">
-                    <i class="fa-solid fa-list-check text-blue-600 text-xl"></i>
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br 
+                            from-blue-500 to-indigo-600
+                            flex items-center justify-center
+                            mb-6 mx-auto">
+                    <i class="fa-solid fa-database text-white text-2xl"></i>
                 </div>
 
-                <h3 class="font-semibold text-lg mb-3">Data Tertata</h3>
+                <h3 class="font-semibold text-lg mb-3">
+                    Data Terpusat
+                </h3>
 
                 <p class="text-slate-600 leading-relaxed">
-                    Semua peminjaman tercatat rapi dan mudah dipantau.
+                    Semua data peminjaman dan alat tersimpan
+                    rapi dalam satu sistem.
                 </p>
             </div>
 
+            <!-- CARD -->
+            <div class="bg-white/80 backdrop-blur-lg p-8 rounded-3xl
+                        shadow-md hover:shadow-xl
+                        transition">
 
-            <div class="group bg-white p-8 rounded-3xl shadow-sm border border-slate-100
-                        hover:shadow-xl transition duration-300">
-
-                <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center
-                            mb-6 group-hover:scale-110 transition">
-                    <i class="fa-solid fa-shield-halved text-blue-600 text-xl"></i>
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br 
+                            from-blue-500 to-indigo-600
+                            flex items-center justify-center
+                            mb-6 mx-auto">
+                    <i class="fa-solid fa-shield-halved text-white text-2xl"></i>
                 </div>
 
-                <h3 class="font-semibold text-lg mb-3">Transparan</h3>
+                <h3 class="font-semibold text-lg mb-3">
+                    Transparan & Aman
+                </h3>
 
                 <p class="text-slate-600 leading-relaxed">
-                    Status alat dan pengembalian bisa dilihat dengan jelas.
+                    Status alat dan histori peminjaman
+                    dapat dipantau dengan jelas.
                 </p>
             </div>
 
@@ -163,9 +228,9 @@ class="pt-36 pb-20 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-cente
     </div>
 </section>
 
-
 <!-- FOOTER -->
-<footer class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-8 text-center">
+<footer class="bg-gradient-to-r from-blue-500 to-indigo-600 
+               text-white py-6 text-center px-4">
     <p class="text-sm opacity-90">
         © {{ date('Y') }} Sistem Peminjaman Alat Sarpras
     </p>
@@ -173,3 +238,11 @@ class="pt-36 pb-20 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-cente
 
 </body>
 </html>
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>

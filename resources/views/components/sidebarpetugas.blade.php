@@ -58,9 +58,9 @@ id="sidebar"
         </a>
 
         <!-- Riwayat -->
-        <a href="#"
+        <a href="{{route('petugas.laporan')}}"
            class="flex items-center gap-4 px-6 py-4 rounded-2xl text-lg
-           {{ request()->routeIs('peminjaman.*')
+           {{ request()->routeIs('petugas.laporan')
               ? 'bg-white text-blue-600 font-semibold shadow-lg'
               : 'bg-white/20 hover:bg-white/30 transition' }}">
             <i class="fa-solid fa-clock-rotate-left text-xl"></i>

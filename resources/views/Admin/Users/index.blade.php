@@ -73,16 +73,17 @@
                                 </a>
 
                                 <form action="{{ route('admin.users.destroy', $user->id) }}"
-                                      method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button
-                                        onclick="return confirm('Yakin hapus pengguna ini?')"
-                                        class="w-full px-3 py-1.5 rounded-lg bg-red-500
-                                               text-white text-xs">
-                                        Hapus
-                                    </button>
-                                </form>
+                                method="POST"
+                                class="delete-form">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="button"
+                                    class="delete-btn w-full px-3 py-1.5 rounded-lg bg-red-500
+                                        text-white text-xs">
+                                    Hapus
+                                </button>
+                            </form>
                             </div>
                         </td>
                     </tr>

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('modal_nama_alat').value = nama;
 
         const jumlahInput = document.getElementById('modal_jumlah');
-        jumlahInput.value = 1;
+        jumlahInput.value = 0;
         jumlahInput.dataset.max = stok; // simpan stok untuk validasi
     }
 
@@ -14,9 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('modalPinjam').classList.add('hidden');
     }
 
-    // =========================
+
     // VALIDASI SEBELUM SUBMIT
-    // =========================
     const form = document.querySelector('#modalPinjam form');
 
     if (form) {
@@ -55,9 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // =========================
     // FLASH MESSAGE
-    // =========================
+
     if (window.flashData?.success) {
         Swal.fire({
             icon: 'success',
@@ -77,5 +75,33 @@ document.addEventListener('DOMContentLoaded', function () {
             confirmButtonColor: '#d33'
         });
     }
+
+// SEARCH 
+
+const searchInput = document.getElementById('searchInput');
+
+if (searchInput) {
+    searchInput.addEventListener('input', function () {
+
+        let keyword = this.value.toLowerCase();
+        let items = document.querySelectorAll('.alat-item');
+
+        items.forEach(item => {
+
+            let nama = item.querySelector('.nama-alat')
+                           .textContent
+                           .toLowerCase();
+
+            if (nama.includes(keyword)) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+
+        });
+
+    });
+}
+
 
 });

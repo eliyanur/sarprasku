@@ -76,13 +76,18 @@
                    class="px-3 py-1.5 rounded-lg bg-yellow-400 text-white text-xs text-center">
                    Edit
                 </a>
-                <form action="{{ route('admin.alat.destroy', $item) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="w-full px-3 py-1.5 rounded-lg bg-red-500 text-white text-xs">
-                        Hapus
-                    </button>
-                </form>
+                <form action="{{ route('admin.alat.destroy', $item) }}"
+                                method="POST"
+                                class="delete-form">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="button"
+                                    class="delete-btn w-full px-3 py-1.5 rounded-lg bg-red-500
+                                        text-white text-xs">
+                                    Hapus
+                                </button>
+                            </form>
             </div>
         </td>
     </tr>

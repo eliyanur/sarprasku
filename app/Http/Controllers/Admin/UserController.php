@@ -60,7 +60,7 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui');
     }
 
     // DELETE
@@ -71,6 +71,6 @@ class UserController extends Controller
     }
 
     $user->delete();
-    return redirect()->route('admin.users.index');
+    return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus');
 }
 }

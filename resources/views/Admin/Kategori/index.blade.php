@@ -58,14 +58,17 @@
                                 </a>
 
                                 <form action="{{ route('admin.kategori.destroy', $item) }}"
-                                      method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button
-                                        class="w-full px-3 py-1.5 rounded-lg bg-red-500
-                                               text-white text-xs">
-                                        Hapus
-                                    </button>
+                                method="POST"
+                                class="delete-form">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="button"
+                                    class="delete-btn w-full px-3 py-1.5 rounded-lg bg-red-500
+                                        text-white text-xs">
+                                    Hapus
+                                </button>
+                            </form>
                                 </form>
                             </div>
                         </td>

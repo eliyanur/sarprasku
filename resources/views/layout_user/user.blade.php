@@ -23,7 +23,21 @@ ml-0 md:ml-[320px]
 md:mr-3 md:rounded-3xl
 transition-all duration-300
 flex flex-col max-w-full shadow-inner">
-
+@auth
+    @if(auth()->user()->is_blocked)
+        <div class="flex items-center gap-3 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4 shadow-sm">
+            <i class="fa-solid fa-circle-exclamation text-xl"></i>
+            <div>
+                <p class="font-semibold">
+                    Akun Anda sedang diblokir sementara
+                </p>
+                <p class="text-sm">
+                    Silakan hubungi petugas untuk informasi lebih lanjut.
+                </p>
+            </div>
+        </div>
+    @endif
+@endauth
     @yield('content')
 </main>
 

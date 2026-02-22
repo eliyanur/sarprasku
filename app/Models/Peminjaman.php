@@ -17,7 +17,7 @@ class Peminjaman extends Model
         'tanggal_kembali',
         'status'
     ];
-
+    
     public function user()
     {
         return $this->belongsTo(User::class);
